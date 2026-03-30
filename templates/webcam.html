@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="animate-fade">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+        <div>
+            <div class="section-tag">High-Frequency Lab</div>
+            <h1 style="font-weight: 800; font-size: 2.5rem; margin-top: 0.5rem; letter-spacing: -2px;">Live Analytics <span style="color: var(--primary);">Lab</span></h1>
+            <p style="color: var(--text-muted); max-width: 600px;">Real-time computer vision processing directly from your browser with industrial telemetry monitoring.</p>
+        </div>
+        <div class="glass" style="padding: 0.75rem 1.5rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
+            <i class="fas fa-satellite-dish" style="color: var(--primary);"></i> STREAM: SOCKET_ACTIVE
+        </div>
+    </div>
+
+    <div class="lab-container" style="grid-template-columns: 1fr;">
+        <!-- Control Strip -->
+        <div class="glass" style="padding: 1.5rem; display: flex; align-items: center; gap: 3rem; margin-bottom: 3rem; border-color: var(--primary-hover);">
+            <div style="flex: 1;">
+                <label class="val-label">Inference Algorithm</label>
+                <select id="webcam-method" style="margin-bottom: 0; min-width: 300px;">
+                    <option value="edge">Industrial Canny</option>
+                    <option value="features">ORB Feature Mapping</option>
+                    <option value="detection">YOLOv8 Medium Detection</option>
+                    <option value="none">Raw Feed (Passthrough)</option>
+                </select>
+            </div>
+            
+            <div style="display: flex; gap: 3rem; border-left: 1px solid var(--border); padding-left: 3rem;">
+                <div>
+                    <div class="val-label">Frames Per Second</div>
+                    <div class="val-large" style="color: var(--primary);">~8 <span style="font-size: 0.8rem; color: var(--text-muted);">FPS</span></div>
+                </div>
+                <div>
+                    <div class="val-label">Socket Latency</div>
+                    <div class="val-large" id="socket-latency">24 <span style="font-size: 0.8rem; color: var(--text-muted);">MS</span></div>
+                </div>
+            </div>
+
+            <button class="btn btn-outline" style="border-color: #ef4444; color: #ef4444;" onclick="location.reload()">
+                <i class="fas fa-power-off"></i> Hard Reset Stream
+            </button>
+        </div>
+
+        <!-- Side-by-Side Live View -->
+        <div class="viewport-area" style="grid-template-columns: 1fr 1fr;">
+            <div class="frame-box">
+                <div class="label-overlay">RAW_SENSOR_DATA</div>
+                <video id="webcam-feed" autoplay playsinline style="width: 100%; height: auto; transform: scaleX(-1);"></video>
+            </div>
+            
+            <div class="frame-box" style="border-color: var(--primary);">
+                <div class="label-overlay" style="background: var(--primary); color: white;">ANALYTICAL_OUTPUT</div>
+                <img id="live-processed" src="" style="width: 100%; height: auto;">
+                <div id="no-signal" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; z-index: 50;">
+                    <i class="fas fa-satellite fa-spin fa-2x" style="color: var(--text-muted); margin-bottom: 1rem;"></i>
+                    <div class="val-label">Establishing Handshake...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('live-processed').onload = () => {
+        document.getElementById('no-signal').style.display = 'none';
+    };
+</script>
+{% endblock %}

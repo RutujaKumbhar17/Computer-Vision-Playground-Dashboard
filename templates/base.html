@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Industrial Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+<body>
+    <header class="app-header glass">
+        <div class="sidebar-logo">
+            <i class="fas fa-shield-halved"></i> VISION<span style="color: var(--primary);">PLATFORM</span>
+        </div>
+        
+        <div class="system-status">
+            <div class="status-item">
+                <div class="status-dot"></div>
+                <span>CORE: <span id="sys-core">ONLINE</span></span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-microchip"></i>
+                <span>CPU: <span id="sys-cpu">--%</span></span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-memory"></i>
+                <span>RAM: <span id="sys-ram">--%</span></span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-clock"></i>
+                <span>UPTIME: <span id="sys-uptime">0s</span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="section-tag">Explore AI</div>
+            <a href="/" class="nav-link {{ 'active' if request.path == '/' else '' }}">
+                <i class="fas fa-layer-group"></i> <span>Industrial Dashboard</span>
+            </a>
+            
+            <div class="section-tag" style="margin-top: 2rem;">Edge & Geometry</div>
+            <a href="/playground/edge" class="nav-link {{ 'active' if '/playground/edge' in request.path else '' }}">
+                <i class="fas fa-bezier-curve"></i> <span>Boundary Detection</span>
+            </a>
+            <a href="/playground/features" class="nav-link {{ 'active' if '/playground/features' in request.path else '' }}">
+                <i class="fas fa-microscope"></i> <span>Keypoint Mapping</span>
+            </a>
+            <a href="/playground/stereo" class="nav-link {{ 'active' if '/playground/stereo' in request.path else '' }}">
+                <i class="fas fa-cube"></i> <span>Spatial Analysis</span>
+            </a>
+            
+            <div class="section-tag" style="margin-top: 2rem;">Deep Inference</div>
+            <a href="/playground/detection" class="nav-link {{ 'active' if '/playground/detection' in request.path else '' }}">
+                <i class="fas fa-object-ungroup"></i> <span>Model Inference</span>
+            </a>
+            <a href="/playground/segmentation" class="nav-link {{ 'active' if '/playground/segmentation' in request.path else '' }}">
+                <i class="fas fa-draw-polygon"></i> <span>Region Masking</span>
+            </a>
+            
+            <div class="section-tag" style="margin-top: 2rem;">Real-time Telemetry</div>
+            <a href="/webcam" class="nav-link {{ 'active' if '/webcam' in request.path else '' }}">
+                <i class="fas fa-satellite-dish"></i> <span>Live Stream Lab</span>
+            </a>
+        </aside>
+
+        <main class="view-container">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

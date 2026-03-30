@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="animate-fade">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+        <div>
+            <div class="section-tag">{{ category }} Lab</div>
+            <h1 style="font-weight: 800; font-size: 2.5rem; margin-top: 0.5rem; letter-spacing: -2px;">Analytical <span style="color: var(--primary);">Playground</span></h1>
+            <p style="color: var(--text-muted); max-width: 600px;">Explore high-precision computer vision via modular algorithm parameters and real-time telemetry analytics.</p>
+        </div>
+        <div class="glass" id="status-badge" style="padding: 0.75rem 1.5rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">
+            <i class="fas fa-microscope" style="color: var(--primary);"></i> SOURCE: DEMO_REPOSITORY
+        </div>
+    </div>
+
+    <div class="lab-container">
+        <!-- Control Panel -->
+        <aside class="control-panel glass">
+            <h3 style="margin-top: 0; font-weight: 700;">Configuration</h3>
+            
+            <div style="margin-bottom: 2rem;">
+                <label class="val-label">Primary Method</label>
+                <select id="method-select" onchange="updateProcessing()">
+                    {% if category == 'edge' %}
+                        <option value="canny">Industrial Canny (L2)</option>
+                        <option value="sobel">Sobel Gradient</option>
+                        <option value="laplacian">Laplacian Morphology</option>
+                    {% elif category == 'features' %}
+                        <option value="orb">ORB (Multi-Scale)</option>
+                        <option value="sift">SIFT (DoG Focus)</option>
+                        <option value="harris">Harris (Refined Corners)</option>
+                    {% elif category == 'segmentation' %}
+                        <option value="kmeans">K-Means (PP Initialization)</option>
+                        <option value="watershed">Watershed Gradient</option>
+                    {% elif category == 'stereo' %}
+                        <option value="bm">Stereo BM (Block Match)</option>
+                        <option value="sgbm">Stereo SGBM (Semi-Global)</option>
+                    {% elif category == 'detection' %}
+                        <option value="yolo">YOLOv8 Medium Inference</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <div id="dynamic-params">
+                <!-- Parameters populated by JS -->
+                {% if category == 'detection' %}
+                <div class="param-group">
+                    <div style="display: flex; justify-content: space-between;">
+                        <label class="val-label">Confidence Threshold</label>
+                        <span id="val-conf_thresh" style="color: var(--primary); font-family: monospace;">25%</span>
+                    </div>
+                    <input type="range" name="conf_thresh" min="5" max="95" value="25" 
+                           oninput="document.getElementById('val-conf_thresh').innerText = this.value + '%'; debouncedUpdate()">
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Telemetry Cards -->
+            <div class="telemetry-grid">
+                <div class="telemetry-card glass">
+                    <div class="val-label">Latencies</div>
+                    <div class="val-large" id="stat-time">--ms</div>
+                </div>
+                <div class="telemetry-card glass">
+                    <div class="val-label">Output Val</div>
+                    <div class="val-large" id="stat-kp">--</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="latencyChart"></canvas>
+            </div>
+
+            <!-- Action Cluster -->
+            <div style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('image-upload').click()">
+                    <i class="fas fa-cloud-upload-alt"></i> Import Asset
+                </button>
+                <input type="file" id="image-upload" accept="image/*" style="display: none;" onchange="handleFileUpload(this)">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <button id="download-btn" class="btn btn-outline" style="width: 100%;" onclick="downloadResult()" disabled>
+                        <i class="fas fa-download"></i> Save
+                    </button>
+                    <button class="btn btn-outline" style="width: 100%;" onclick="updateProcessing()">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Viewport -->
+        <main class="viewport-area">
+            <div class="frame-box">
+                <div class="label-overlay">INPUT STREAM</div>
+                <img id="input-img" src="/data/demo/{{ 'fruit.png' if category in ['segmentation', 'detection'] else 'cityscape.png' }}">
+            </div>
+            
+            <div class="frame-box" style="border-color: var(--primary);">
+                <div class="label-overlay" style="background: var(--primary); color: white;">INFERENCE RESULT</div>
+                <img id="output-img" src="">
+                <div id="loading-spinner" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(2, 6, 23, 0.9); display: none; z-index: 20;">
+                    <i class="fas fa-dna fa-spin fa-2x" style="color: var(--primary); margin-bottom: 1rem;"></i>
+                    <div class="val-label">Processing Analytical Loop...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+    const CATEGORY = "{{ category }}";
+</script>
+{% endblock %}

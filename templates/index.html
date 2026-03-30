@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="animate-fade">
+    <div style="margin-bottom: 4rem;">
+        <div class="section-tag">Enterprise Vision System</div>
+        <h1 style="font-weight: 800; font-size: 3.5rem; margin-top: 0.5rem; letter-spacing: -3px; line-height: 1;">Industrial <span style="color: var(--primary);">CV Intelligence</span></h1>
+        <p style="color: var(--text-muted); max-width: 600px; font-size: 1.1rem; margin-top: 1.5rem;">A high-precision analytical platform for real-time computer vision benchmarking, feature mapping, and deep neural inference.</p>
+    </div>
+
+    <div class="card-grid">
+        <!-- Edge Detection Card -->
+        <a href="/playground/edge" class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-bezier-curve fa-lg"></i></div>
+            <h3>Boundary Detection</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">Industrial-grade edge extraction using L2-gradient Canny filters and automated morphology.</p>
+        </a>
+
+        <!-- Feature Points Card -->
+        <a href="/playground/features" class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-microscope fa-lg"></i></div>
+            <h3>Feature Mapping</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">High-capacity keypoint detection with sub-pixel refinement and scale-invariant descriptors.</p>
+        </a>
+
+        <!-- Stereo Depth Card -->
+        <a href="/playground/stereo" class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-cube fa-lg"></i></div>
+            <h3>Spatial Analysis</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">3D depth estimation from stereo pairs using Semi-Global Block Matching (SGBM) algorithms.</p>
+        </a>
+
+        <!-- Object Detection Card -->
+        <a href="/playground/detection" class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-object-ungroup fa-lg"></i></div>
+            <h3>Model Inference</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">Neural network execution using YOLOv8 Medium weights for high-precision object classification.</p>
+        </a>
+
+        <!-- Segmentation Card -->
+        <a href="/playground/segmentation" class="feature-card glass">
+            <div class="icon-box"><i class="fas fa-draw-polygon fa-lg"></i></div>
+            <h3>Region Masking</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">Advanced image segmentation using K-Means++ initialization and Watershed markers.</p>
+        </a>
+
+        <!-- Webcam Lab Card -->
+        <a href="/webcam" class="feature-card glass" style="border-color: var(--primary);">
+            <div class="icon-box" style="color: var(--primary);"><i class="fas fa-satellite-dish fa-lg"></i></div>
+            <h3>Live Telemetry</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">Real-time WebSocket streaming lab for live algorithm benchmarking and latency audits.</p>
+        </a>
+    </div>
+
+    <!-- System Overview Footer -->
+    <div class="glass" style="margin-top: 5rem; padding: 2.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <div class="section-tag" style="margin-bottom: 0.5rem;">Inference Engine</div>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">ACTIVE MODEL: <span style="color: var(--text-main); font-weight: 600;">YOLOv8_MEDIUM_V1.0</span></div>
+        </div>
+        <div style="display: flex; gap: 3rem; text-align: right;">
+            <div>
+                <div class="val-label">Avg Latency</div>
+                <div style="font-weight: 700; color: var(--primary);">24ms</div>
+            </div>
+            <div>
+                <div class="val-label">Precision</div>
+                <div style="font-weight: 700; color: var(--primary);">94.8%</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
