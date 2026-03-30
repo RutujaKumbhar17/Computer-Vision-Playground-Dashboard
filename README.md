@@ -13,17 +13,22 @@ The **Computer Vision Playground Dashboard** allows users to upload images, appl
 
 # Table of Contents
 
-* Introduction
-* Project Architecture
-* Data Flow
-* System Modules
-* Technology Stack
-* Installation
-* Usage
-* Real World Applications
-* Advantages of the Project
-* Future Improvements
-* Conclusion
+- Introduction  
+- System Architecture  
+- Detailed System Architecture  
+- Preprocessing Pipeline Architecture  
+- Feature Extraction Pipeline  
+- Computer Vision Processing Engine  
+- Visualization Architecture  
+- End-to-End Data Flow  
+- System Modules  
+- Technology Stack  
+- Installation  
+- Usage  
+- Real World Applications  
+- Advantages of the Project  
+- Future Improvements  
+- Conclusion  
 
 ---
 
@@ -35,11 +40,11 @@ The **Computer Vision Playground Dashboard** solves this problem by providing a 
 
 The system enables users to:
 
-* Upload images
-* Apply computer vision techniques
-* Visualize outputs
-* Compare algorithm results
-* Understand how computer vision pipelines work
+- Upload images  
+- Apply computer vision techniques  
+- Visualize outputs  
+- Compare algorithm results  
+- Understand how computer vision pipelines work  
 
 This project is particularly useful for **education, research, and rapid prototyping** of vision-based systems.
 
@@ -69,122 +74,153 @@ Vision3 --> Processor
 Processor --> Visualizer[Visualization Engine]
 
 Visualizer --> Dashboard[Interactive Dashboard Display]
+````
 
+---
+
+# Preprocessing Pipeline Architecture
+
+This diagram explains **how raw images are prepared before computer vision processing**.
+
+```mermaid
+flowchart LR
+
+A[Raw Image]
+
+A --> B[Image Loader]
+
+B --> C[Resize Operation]
+
+C --> D[Color Conversion]
+
+D --> E[Noise Reduction]
+
+E --> F[Normalization]
+
+F --> G[Preprocessed Image Output]
+```
+
+---
+
+# Feature Extraction Pipeline
+
+This architecture explains how the system **extracts meaningful patterns from images**.
+
+```mermaid
+flowchart TD
+
+A[Preprocessed Image]
+
+A --> B[Edge Detection]
+
+A --> C[Corner Detection]
+
+A --> D[Contour Detection]
+
+A --> E[Keypoint Detection]
+
+B --> F[Feature Map]
+
+C --> F
+
+D --> F
+
+E --> F
+
+F --> G[Feature Aggregation]
+
+G --> H[Processed Features]
+```
+
+---
+
+# Computer Vision Processing Engine
+
+This component applies **vision algorithms to extract insights from images**.
+
+```mermaid
+flowchart TD
+
+A[Input Feature Map]
+
+A --> B[Image Processing Algorithms]
+
+B --> C1[Edge Detection]
+B --> C2[Thresholding]
+B --> C3[Filtering]
+
+A --> D[Vision Models]
+
+D --> E1[Object Detection]
+D --> E2[Image Classification]
+D --> E3[Segmentation]
+
+C1 --> F[Result Aggregator]
+C2 --> F
+C3 --> F
+
+E1 --> F
+E2 --> F
+E3 --> F
+
+F --> G[Processed Vision Output]
+```
+
+---
+
+# Visualization Architecture
+
+This diagram explains how processed results are shown to the user.
+
+```mermaid
+flowchart LR
+
+A[Processed Vision Output]
+
+A --> B[Result Formatter]
+
+B --> C[Overlay Generator]
+
+C --> D[Visualization Renderer]
+
+D --> E[Dashboard Display]
+
+E --> F[User Interaction]
 ```
 
 ---
 
 # End-to-End Data Flow
 
-The entire system processes visual data through multiple structured stages.
-
----
-
-## 1. Image Input
-
-Users provide input through the dashboard:
-
-* Uploading images
-* Selecting images from datasets
-* Using camera input (if available)
-
-The input image is then passed into the processing pipeline.
-
----
-
-## 2. Preprocessing Stage
-
-Before applying computer vision algorithms, the image goes through preprocessing.
-
-Typical preprocessing operations include:
-
-* Image resizing
-* Color space conversion
-* Noise removal
-* Image normalization
-
-These steps ensure that the image is suitable for computer vision analysis.
-
----
-
-## 3. Computer Vision Processing
-
-After preprocessing, the image is passed to different computer vision modules.
-
-These may include:
-
-* Edge detection
-* Feature extraction
-* Contour detection
-* Filtering operations
-* Image segmentation
-* Object detection
-
-Each module processes the image and generates intermediate outputs.
-
----
-
-## 4. Result Processing
-
-Once the computer vision algorithms generate outputs, the results are formatted for visualization.
-
-This includes:
-
-* Overlaying detected features
-* Generating processed images
-* Formatting visualization outputs
-
----
-
-## 5. Visualization
-
-The visualization engine displays results on the dashboard.
-
-Users can observe:
-
-* Processed images
-* Detected edges
-* Feature maps
-* Model outputs
-
-This makes it easier to understand how different algorithms transform visual data.
-
----
-
-# Data Flow Diagram
+This is the **complete pipeline combining all stages**.
 
 ```mermaid
 flowchart LR
 
-Input[User Upload Image]
+User[User Upload Image]
 
-Input --> Loader[Image Loader]
+User --> Input[Input Module]
 
-Loader --> Preprocess[Preprocessing Pipeline]
+Input --> Preprocess[Preprocessing Pipeline]
 
-Preprocess --> Algorithms[Computer Vision Algorithms]
+Preprocess --> Features[Feature Extraction]
 
-Algorithms --> Feature[Feature Extraction]
+Features --> Vision[Computer Vision Algorithms]
 
-Feature --> Model[Model Processing]
+Vision --> Results[Result Processing]
 
-Model --> Output[Output Formatter]
+Results --> Visualization[Visualization Engine]
 
-Output --> Display[Dashboard Visualization]
+Visualization --> Dashboard[Interactive Dashboard]
 
-Display --> UserInteraction[User Interaction]
-
+Dashboard --> User
 ```
 
 ---
 
 # System Modules
 
-The project is composed of several modules that work together to create the dashboard.
-
----
-
-## 1. Dashboard Interface
+## 1 Dashboard Interface
 
 The dashboard provides an interactive user interface where users can:
 
@@ -193,11 +229,9 @@ The dashboard provides an interactive user interface where users can:
 * Configure parameters
 * View results
 
-It acts as the main interaction layer between the user and the computer vision pipeline.
-
 ---
 
-## 2. Image Input Module
+## 2 Image Input Module
 
 This module manages all incoming image data.
 
@@ -210,7 +244,7 @@ Responsibilities include:
 
 ---
 
-## 3. Preprocessing Pipeline
+## 3 Preprocessing Pipeline
 
 The preprocessing module prepares images before analysis.
 
@@ -221,15 +255,11 @@ Operations include:
 * Noise reduction
 * Image normalization
 
-This ensures consistent inputs for vision algorithms.
-
 ---
 
-## 4. Computer Vision Modules
+## 4 Computer Vision Modules
 
 These modules perform the main vision operations.
-
-Examples include:
 
 ### Image Processing
 
@@ -252,7 +282,7 @@ Examples include:
 
 ---
 
-## 5. Visualization Engine
+## 5 Visualization Engine
 
 This module renders results for user interpretation.
 
@@ -263,46 +293,43 @@ It can display:
 * Algorithm outputs
 * Feature maps
 
-Visualization helps users understand the effect of each algorithm.
-
 ---
 
 # Technology Stack
 
-| Component               | Technology                 |
-| ----------------------- | -------------------------- |
-| Programming Language    | Python                     |
-| Computer Vision Library | OpenCV                     |
-| Data Processing         | NumPy                      |
-| Data Handling           | Pandas                     |
-| Visualization           | Matplotlib / Plotly        |
-| Dashboard Framework     | Streamlit / Flask          |
-| Image Processing        | PIL / OpenCV               |
-| Development Environment | Python Virtual Environment |
+| Component               | Technology          |
+| ----------------------- | ------------------- |
+| Programming Language    | Python              |
+| Computer Vision Library | OpenCV              |
+| Data Processing         | NumPy               |
+| Data Handling           | Pandas              |
+| Visualization           | Matplotlib / Plotly |
+| Dashboard Framework     | Streamlit / Flask   |
+| Image Processing        | PIL / OpenCV        |
 
 ---
 
 # Installation
 
-Clone the repository:
+Clone the repository
 
 ```bash
 git clone https://github.com/RutujaKumbhar17/Computer-Vision-Playground-Dashboard.git
 ```
 
-Navigate to the project directory:
+Navigate to the project directory
 
 ```bash
 cd Computer-Vision-Playground-Dashboard
 ```
 
-Install required dependencies:
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application:
+Run the application
 
 ```bash
 python app.py
@@ -322,8 +349,6 @@ python app.py
 ---
 
 # Real World Applications
-
-The project can be used in several real-world scenarios:
 
 * Computer Vision education
 * Image processing experimentation
@@ -363,3 +388,7 @@ The **Computer Vision Playground Dashboard** provides an interactive platform fo
 
 This project bridges the gap between **computer vision theory and practical implementation**, making it valuable for students, developers, and researchers.
 
+
+---
+
+# project Demonstration
