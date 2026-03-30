@@ -392,3 +392,26 @@ This project bridges the gap between **computer vision theory and practical impl
 ---
 
 # project Demonstration
+
+---
+## Project Demo
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/RutujaKumbhar17/Computer-Vision-Playground-Dashboard/main/Demo/WhatsApp%20Image%202026-03-30%20at%2011.32.25%20PM.jpeg" width="800">
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/RutujaKumbhar17/Computer-Vision-Playground-Dashboard/main/Demo/WhatsApp%20Image%202026-03-30%20at%2011.33.20%20PM.jpeg" width="800">
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/RutujaKumbhar17/Computer-Vision-Playground-Dashboard/main/Demo/WhatsApp%20Image%202026-03-30%20at%2011.35.32%20PM.jpeg" width="800">
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/RutujaKumbhar17/Computer-Vision-Playground-Dashboard/main/Demo/WhatsApp%20Image%202026-03-30%20at%2011.36.19%20PM.jpeg" width="800">
+</p>
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/RutujaKumbhar17/Computer-Vision-Playground-Dashboard/main/Demo/WhatsApp%20Image%202026-03-30%20at%2011.37.00%20PM.jpeg" width="800">
+</p>
